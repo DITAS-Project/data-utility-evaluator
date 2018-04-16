@@ -5,7 +5,7 @@ pipeline {
         stage('Build - test') {
             agent {
                 docker {
-                    image 'python:slim'					
+                    image 'python:slim'
                 }
             }
             steps {
@@ -28,17 +28,8 @@ pipeline {
         }
 
       }
-      steps {
-        sh 'pip install --no-cache-dir -r requirements.txt'
-      }
-      post {
-        always {
-          echo 'To-Do Record tests'
 
-        }
 
-      }
-    }
     stage('Image creation') {
       agent any
       steps {
