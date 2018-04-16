@@ -10,7 +10,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip3 install --no-cache-dir -r requirements.txt'
+                sh 'pip install --no-cache-dir -r requirements.txt'
 
 				// Any artifact? Dont think so
 				// TO-DO
