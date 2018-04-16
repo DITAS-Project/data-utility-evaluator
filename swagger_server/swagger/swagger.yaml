@@ -8,8 +8,8 @@ info:
     email: "pierluigi.plebani@polimi.it"
   license:
     name: "TBD"
-host: "virtserver.swaggerhub.com"
-basePath: "/ditas-project/DataUtilityRefinement/0.2.1"
+host: "localhost:8080"
+basePath: "/ditas-project/DataUtilityEvaluator/0.2.1"
 tags:
 - name: "Data Utility"
   description: "Definition of data utility"
@@ -19,12 +19,12 @@ schemes:
 - "https"
 paths:
   /datautility:
-    get:
+    post:
       summary: "returns the data utility related to the data exposed through a CAF\
         \ method"
       description: "By passing one of the URL exposed by a CAF, the method returns\
         \ the data utility"
-      operationId: "calculateDU"
+      operationId: "calculate_du"
       produces:
       - "application/json"
       parameters:
@@ -41,16 +41,13 @@ paths:
         type: "array"
         items:
           type: "string"
-        collectionFormat: "multi"
-      - name: "filter"
-        in: "query"
+      - in: "body"
+        name: "filter"
         description: "list of pairs attributes, value (needs to be compatible with\
           \ Filter)"
         required: false
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
+        schema:
+          $ref: "#/definitions/Filter"
       responses:
         200:
           description: "search results matching criteria"
@@ -58,17 +55,18 @@ paths:
             $ref: "#/definitions/DataUtility"
         400:
           description: "bad input parameter"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
   Filter:
     type: "object"
-    required:
-    - "name"
-    - "value"
     properties:
       name:
         type: "string"
       value:
         type: "string"
+    example:
+      name: "name"
+      value: "value"
   DataUtility:
     type: "object"
     required:
