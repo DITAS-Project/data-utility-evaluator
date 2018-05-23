@@ -3,13 +3,13 @@ swagger: "2.0"
 info:
   description: "Data Utility Evaluator"
   version: "0.2.1"
-  title: "Data Utility Evaluator API"
+  title: "Data Utility Evaluator"
   contact:
     email: "pierluigi.plebani@polimi.it"
   license:
     name: "TBD"
 host: "localhost:8080"
-basePath: "/ditas-project/DataUtilityEvaluator/0.2.1"
+basePath: "/"
 tags:
 - name: "Data Utility"
   description: "Definition of data utility"
@@ -25,6 +25,8 @@ paths:
       description: "By passing one of the URL exposed by a CAF, the method returns\
         \ the data utility"
       operationId: "calculate_du"
+      consumes:
+      - "application/json"
       produces:
       - "application/json"
       parameters:
@@ -34,6 +36,7 @@ paths:
         required: true
         type: "string"
         format: "url"
+        x-example: "http://ditas/datasource/method"
       - name: "attributes"
         in: "query"
         description: "list of attributes relevant for the user"
@@ -41,6 +44,7 @@ paths:
         type: "array"
         items:
           type: "string"
+        x-example: "['city','state']"
       - in: "body"
         name: "filter"
         description: "list of pairs attributes, value (needs to be compatible with\
@@ -79,7 +83,7 @@ definitions:
       URL:
         type: "string"
         format: "url"
-        example: "http://mydatasource/pippo"
+        example: "http://mydatasource/method"
       accuracy:
         type: "number"
         format: "float"
@@ -101,4 +105,4 @@ definitions:
       accuracy: 0.1
       completeness: 0.1
       consistency: 0.1
-      URL: "http://mydatasource/pippo"
+      URL: "http://mydatasource/method"
