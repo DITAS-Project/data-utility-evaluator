@@ -20,38 +20,25 @@ schemes:
 paths:
   /datautility:
     post:
-      summary: "returns the data utility related to the data exposed through a CAF\
-        \ method"
-      description: "By passing one of the URL exposed by a CAF, the method returns\
-        \ the data utility"
+      summary: "returns the data utility related to the data exposed through a CAF method"
+      description: "By passing one of the Blueprint and the application requirement, the method returns the Blueprint with the data utility values calculated based on the application requirements"
       operationId: "calculate_du"
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - name: "method"
-        in: "query"
-        description: "URL of the method exposed by a data source"
-        required: true
-        type: "string"
-        format: "url"
-        x-example: "http://ditas/datasource/method"
-      - name: "attributes"
-        in: "query"
-        description: "list of attributes relevant for the user"
-        required: false
-        type: "array"
-        items:
+        - name: "Blueprint"
+          in: "formData"
+          description: "Blueprint to be updated"
+          required: true
           type: "string"
-        x-example: "['city','state']"
-      - in: "body"
-        name: "filter"
-        description: "list of pairs attributes, value (needs to be compatible with\
-          \ Filter)"
-        required: false
-        schema:
-          $ref: "#/definitions/Filter"
+          format: "url"   
+        - name: "Application Requirement"
+          in: "formData"
+          description: "Application requirements of the application designer"
+          required: true
+          type: "string"
       responses:
         200:
           description: "search results matching criteria"
@@ -60,17 +47,8 @@ paths:
         400:
           description: "bad input parameter"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
+
 definitions:
-  Filter:
-    type: "object"
-    properties:
-      name:
-        type: "string"
-      value:
-        type: "string"
-    example:
-      name: "name"
-      value: "value"
   DataUtility:
     type: "object"
     required:
