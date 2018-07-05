@@ -41,46 +41,7 @@ paths:
           type: "string"
       responses:
         200:
-          description: "search results matching criteria"
-          schema:
-            $ref: "#/definitions/DataUtility"
+          description: "Blueprint updated"
         400:
           description: "bad input parameter"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
-
-definitions:
-  DataUtility:
-    type: "object"
-    required:
-    - "URL"
-    - "accuracy"
-    - "completeness"
-    - "consistency"
-    - "timeliness"
-    properties:
-      URL:
-        type: "string"
-        format: "url"
-        example: "http://mydatasource/method"
-      accuracy:
-        type: "number"
-        format: "float"
-        example: 0.1
-      consistency:
-        type: "number"
-        format: "float"
-        example: 0.1
-      completeness:
-        type: "number"
-        format: "float"
-        example: 0.1
-      timeliness:
-        type: "number"
-        format: "float"
-        example: 0.1
-    example:
-      timeliness: 0.1
-      accuracy: 0.1
-      completeness: 0.1
-      consistency: 0.1
-      URL: "http://mydatasource/method"
