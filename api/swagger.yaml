@@ -28,20 +28,36 @@ paths:
       produces:
       - "application/json"
       parameters:
-        - name: "Blueprint"
-          in: "formData"
-          description: "Blueprint to be updated"
-          required: true
-          type: "string"
-          format: "url"   
-        - name: "Application Requirement"
-          in: "formData"
-          description: "Application requirements of the application designer"
-          required: true
-          type: "string"
+      - in: "body"
+        name: "Input"
+        description: "the List of violations"
+        required: true
+        schema:
+          $ref: "#/definitions/inputs"
       responses:
         200:
           description: "Blueprint updated"
+          schema:
+            $ref: "#/definitions/concreteBlueprint"
         400:
           description: "bad input parameter"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
+definitions:
+  inputs:
+    properties:
+      concreteBlueprint:
+        $ref: "#/definitions/concreteBlueprint"
+      applicationRequirements:
+        $ref: "#/definitions/applicationRequirements"
+  concreteBlueprint:
+    properties:
+      name:
+        type: string
+      tag:
+        type: string  
+  applicationRequirements:
+    properties:
+      name:
+        type: string
+      tag:
+        type: string  
