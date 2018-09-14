@@ -30,7 +30,6 @@ paths:
       parameters:
       - in: "body"
         name: "Input"
-        description: "the List of violations"
         required: true
         schema:
           $ref: "#/definitions/inputs"
@@ -47,6 +46,8 @@ definitions:
     properties:
       concreteBlueprint:
         $ref: "#/definitions/concreteBlueprint"
+      methodName:
+        type: string
       applicationRequirements:
         $ref: "#/definitions/applicationRequirements"
   concreteBlueprint:
