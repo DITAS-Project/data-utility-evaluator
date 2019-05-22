@@ -18,7 +18,7 @@ tags:
 schemes:
 - "https"
 paths:
-  /datautility:
+  /v1/computeDataUtility:
     post:
       summary: "returns the data utility related to the data exposed through a CAF method"
       description: "By passing one of the Blueprint and the application requirement, the method returns the Blueprint with the data utility values calculated based on the application requirements"
@@ -48,17 +48,9 @@ definitions:
         $ref: "#/definitions/concreteBlueprint"
       methodName:
         type: string
-      applicationRequirements:
-        $ref: "#/definitions/applicationRequirements"
   concreteBlueprint:
     properties:
       name:
         type: string
       tag:
-        type: string  
-  applicationRequirements:
-    properties:
-      name:
         type: string
-      tag:
-        type: string  
