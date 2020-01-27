@@ -1,0 +1,50 @@
+---
+swagger: "2.0"
+info:
+  description: "Data Utility Evaluator"
+  version: "0.2.1"
+  title: "Data Utility Evaluator API"
+  contact:
+    email: "pierluigi.plebani@polimi.it"
+  license:
+    name: "TBD"
+host: "localhost:8080"
+basePath: "/ditas-project/DataUtilityEvaluator/1.0"
+tags:
+- name: "Data Utility"
+  description: "Definition of data utility"
+- name: "VDC-CAF"
+  description: "Virtual Data Container CAF"
+schemes:
+- "https"
+paths:
+  /datautility:
+    post:
+      summary: "returns the blueprint with associated the updated data utility values"
+      description: "By passing the blueprint, the method returns the updated blueprint"
+      operationId: "calculate_du"
+      consumes:
+      - "application/json; charset=utf-8"
+      produces:
+      - "application/json; charset=utf-8"
+      parameters:
+      - in: "body"
+        name: "Blueprint"
+        description: "file json containing the abstract blueprint to be updated with\
+          \ the data utility values"
+        required: true
+        schema:
+          $ref: "#/definitions/blueprint"
+      responses:
+        "200":
+          description: "Updated blueprint"
+          schema:
+            $ref: "#/definitions/blueprint"
+        "400":
+          description: "bad input parameter"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+definitions:
+  blueprint:
+    type: "object"
+    description: "JSON document conforming to abstract blueprint definitions as in\
+      \ https://github.com/DITAS-Project/blueprint"
