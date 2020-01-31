@@ -1,8 +1,12 @@
 import connexion
 import six
 
+
 from swagger_server.models.blueprint import Blueprint  # noqa: E501
 from swagger_server import util
+
+import start
+import WriteDim
 
 
 def calculate_du(Blueprint):  # noqa: E501
@@ -17,4 +21,7 @@ def calculate_du(Blueprint):  # noqa: E501
     """
     #if connexion.request.is_json:
      #   Blueprint = Blueprint.from_dict(connexion.request.get_json())  # noqa: E501
-    return Blueprint
+    dimensions = start.start(Blueprint)
+    BP = WriteDim.writedim(Blueprint, dimensions)
+   # BP = writedim.writedim(Blueprint, dimensions) 
+    return BP
