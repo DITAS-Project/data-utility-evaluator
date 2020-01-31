@@ -15,7 +15,7 @@
 		"birthDate": "1983-10-21",
 		"gender": "F",
 		"bmi": 20,
-		"cholesterol_total_value": "3.77326614807728"
+		"cholesterol_total_value": ""
 	},
 	{
 		"birthDate": "1983-10-21",
@@ -75,6 +75,78 @@
 		"birthDate": "1983-10-21",
 		"gender": "F",
 		"bmi": 21,
+		"cholesterol_total_value": ""
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": ""
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
+		"cholesterol_total_value": "5.05065516545954"
+	},
+	{
+		"birthDate": "1983-10-21",
+		"gender": "F",
+		"bmi": 21,
 		"cholesterol_total_value": "5.05065516545954"
 	},
 	{
@@ -83,5 +155,4 @@
 		"bmi": 21,
 		"cholesterol_total_value": "5.05065516545954"
 	}
-
 ]
