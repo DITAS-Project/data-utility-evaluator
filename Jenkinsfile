@@ -5,7 +5,7 @@ pipeline {
         stage('Build - test') {
             agent {
                 docker {
-                    image 'python:slim'
+                    image 'python:3.7-slim-buster'
 					// TODO some cache to avoid npm sintall on every execution?
                 }
             }
