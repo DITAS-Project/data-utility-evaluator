@@ -9,7 +9,7 @@ info:
   license:
     name: "TBD"
 host: "localhost:8080"
-basePath: "/ditas-project/DataUtilityEvaluator/0.2.1"
+basePath: "/ditas-project/DataUtilityEvaluator/1.0"
 tags:
 - name: "Data Utility"
   description: "Definition of data utility"
@@ -20,85 +20,31 @@ schemes:
 paths:
   /datautility:
     post:
-      summary: "returns the data utility related to the data exposed through a CAF\
-        \ method"
-      description: "By passing one of the URL exposed by a CAF, the method returns\
-        \ the data utility"
+      summary: "returns the blueprint with associated the updated data utility values"
+      description: "By passing the blueprint, the method returns the updated blueprint"
       operationId: "calculate_du"
+      consumes:
+      - "application/json; charset=utf-8"
       produces:
-      - "application/json"
+      - "application/json; charset=utf-8"
       parameters:
-      - name: "method"
-        in: "query"
-        description: "URL of the method exposed by a data source"
-        required: true
-        type: "string"
-        format: "url"
-      - name: "attributes"
-        in: "query"
-        description: "list of attributes relevant for the user"
-        required: false
-        type: "array"
-        items:
-          type: "string"
       - in: "body"
-        name: "filter"
-        description: "list of pairs attributes, value (needs to be compatible with\
-          \ Filter)"
-        required: false
+        name: "Blueprint"
+        description: "file json containing the abstract blueprint to be updated with\
+          \ the data utility values"
+        required: true
         schema:
-          $ref: "#/definitions/Filter"
+          $ref: "#/definitions/blueprint"
       responses:
-        200:
-          description: "search results matching criteria"
+        "200":
+          description: "Updated blueprint"
           schema:
-            $ref: "#/definitions/DataUtility"
-        400:
+            $ref: "#/definitions/blueprint"
+        "400":
           description: "bad input parameter"
       x-swagger-router-controller: "swagger_server.controllers.default_controller"
 definitions:
-  Filter:
+  blueprint:
     type: "object"
-    properties:
-      name:
-        type: "string"
-      value:
-        type: "string"
-    example:
-      name: "name"
-      value: "value"
-  DataUtility:
-    type: "object"
-    required:
-    - "URL"
-    - "accuracy"
-    - "completeness"
-    - "consistency"
-    - "timeliness"
-    properties:
-      URL:
-        type: "string"
-        format: "url"
-        example: "http://mydatasource/pippo"
-      accuracy:
-        type: "number"
-        format: "float"
-        example: 0.1
-      consistency:
-        type: "number"
-        format: "float"
-        example: 0.1
-      completeness:
-        type: "number"
-        format: "float"
-        example: 0.1
-      timeliness:
-        type: "number"
-        format: "float"
-        example: 0.1
-    example:
-      timeliness: 0.1
-      accuracy: 0.1
-      completeness: 0.1
-      consistency: 0.1
-      URL: "http://mydatasource/pippo"
+    description: "JSON document conforming to abstract blueprint definitions as in\
+      \ https://github.com/DITAS-Project/blueprint"

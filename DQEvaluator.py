@@ -1,26 +1,10 @@
-/**
- * Copyright 2018 Information System Group, DEIB, Politecnico di Milano
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- * 
- * This is being developed for the DITAS Project: https://www.ditas-project.eu/
- */
-
 import pandas as pd
 import numpy as np
 from time import gmtime, strftime
 import json
 import os
+import csv
+
 # -------- BATCH -----------
 def completeness_missing(df):
     """
@@ -258,9 +242,17 @@ def timeliness_evaluation(time_column, volatility):
 
     return np.mean(timeliness)
 
+def volume_calc(source):
+   count=0
+   with open(source, newline='') as f:
+       reader = csv.reader(f)
+       for row in reader:
+           count=count+1
+        
+   return count
 
 
-def DQEvaluator(method, attribute_list=None, filter=None):
+def DQEvaluator(method, attribute_list=None):
     """
     This function evaluate the DQ of the provided dataframe wrt the dq metadata specification
 
@@ -307,6 +299,7 @@ def DQEvaluator(method, attribute_list=None, filter=None):
     config = json.load(open("config_files/"+config_dict[method]))
 
     df=pd.read_csv(method)
+    
     source_type=config['source_type']
     datatypes=config['datatypes']
     rules=config['association_rules']
@@ -322,12 +315,13 @@ def DQEvaluator(method, attribute_list=None, filter=None):
     except:
         pass
 
+    
 
-    if filter is not None:
+   # if filter is not None:
         #   selection
-        for p in filter:
-            values = filter[p]
-            df = df.loc[df[p].isin(values)]
+    #    for p in filter:
+     #       values = filter[p]
+      #      df = df.loc[df[p].isin(values)]
 
     if attribute_list is not None:
         #	projection
@@ -341,6 +335,7 @@ def DQEvaluator(method, attribute_list=None, filter=None):
     accuracy_max = 0
     timeliness=0
     complet_freq=0
+    volume=0
 
     # DIM GLOBALI
     for i in metrics[source_type]['global']:
@@ -352,7 +347,8 @@ def DQEvaluator(method, attribute_list=None, filter=None):
             parameters = {'df': df, 'rules': rules}
             consistency_metric = metrics[source_type]['global'][i]
             consistency=consistency_metric(**parameters)
-
+    
+    
     #delete attribute not present in the df, from the datatypes dictionary
     attr_to_delete=[]
     for attr in datatypes:
@@ -392,11 +388,15 @@ def DQEvaluator(method, attribute_list=None, filter=None):
 
     if complet_freq:
         completeness=(completeness+complet_freq)/2
+    
+    volume=volume_calc(method)
+
         
     results={'completeness': completeness,
              'consistency': consistency,
              'accuracy': accuracy_mean,
-             'timeliness': timeliness
+             'timeliness': timeliness,
+             'volume': volume
              }
 
 
