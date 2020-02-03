@@ -9,7 +9,7 @@ COMPONENT_URL="http://31.171.247.162:50002"
 YAML_FILE="./swagger_server/swagger/swagger.yaml"
 
 attempts=0
-until $(curl --output /dev/null --silent --head --fail $COMPONENT_URL/v1/ui); do
+until $(curl --output /dev/null --silent --head --fail $COMPONENT_URL/ditas-project/DataUtilityEvaluator/1.0/ui); do
     if [ ${attempts} -eq 20 ];then
       echo "Max attempts reached, cannot connect to component"
       exit 1
