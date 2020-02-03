@@ -43,7 +43,7 @@ def writedim(bp_file, dimensions):
                     if (d3 == "volume"):
                         #tmp=d1[P][d3]['value']
                         #print(tmp)
-                        d1[P][d3]["minimum"] = volume
+                        d1[P][d3]["value"] = volume
                     if (d3 == "accuracy"):
                         #tmp=d1[P][d3]['value']
                         #print(tmp)
